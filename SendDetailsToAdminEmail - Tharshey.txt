@@ -1,0 +1,34 @@
+//Tharshey Naidoo
+//PBDV Mobile App
+//13/04/2023
+
+import java.util.*;
+import javax.mail.*;
+import javax.mail.internet.*;
+
+public class ContactUsEmailSender {
+    
+    private String recipientEmail = "ADMIN EMAIL HERE";
+    
+    public void sendEmail(String name, String email, String message) throws MessagingException {
+        // Set the email properties
+        Properties props = new Properties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
+        
+	// Get the default Session object.
+        Session session = Session.getDefaultInstance(props);
+
+        // Create the email message
+        Message emailMessage = new MimeMessage(session);
+        emailMessage.setFrom(new InternetAddress(senderEmail));
+        emailMessage.addRecipients(Message.RecipientType.TO,new InternetAddress(recipientEmail));
+        emailMessage.setSubject("New contact us message from " + name);
+        emailMessage.setText("Name: " + name + "\nEmail: " + email + "\nMessage: " + message);
+        
+        // Send the email
+        Transport.send(emailMessage);
+    }
+}
