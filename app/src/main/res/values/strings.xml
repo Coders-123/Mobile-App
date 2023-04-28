@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Mobile Health Clinic</string>
+        <string-array name="form_type">
+            <item>Consultation</item>
+            <item>Hospitalisation</item>
+        </string-array>
+
+        <string-array name="speciality_spinner">
+            <item>Blood Test</item>
+            <item>Hiv/Aids Counselling and Testing</item>
+            <item>Vaccinations</item>
+            <item>Female Reproductive Health</item>
+            <item>Pap smears</item>
+            <item>Emergency Services</item>
+            <item>General Practitioner</item>
+        </string-array>
+
+        <string-array name="blood_spinner">
+            <item>A+</item>
+            <item>A-</item>
+            <item>B+</item>
+            <item>B-</item>
+            <item>AB+</item>
+            <item>AB-</item>
+            <item>O+</item>
+            <item>O-</item>
+        </string-array>
+
+</resources>
