@@ -52,13 +52,17 @@
         android:textColor="@color/white"
         android:textSize="26sp"
         android:textStyle="bold" />
-    <ImageView
-        android:layout_width="150dp"
-        android:layout_height="200dp"
+    <Button
+        android:id="@+id/selectUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@id/userName"
         android:layout_centerHorizontal="true"
-        android:paddingTop="16dp"
-        android:src="@drawable/cndlogo" />
+        android:padding="12dp"
+        android:text="Select User"
+        android:textSize="20sp"
+        app:cornerRadius="15dp"
+        />
 
     <Button
         android:id="@+id/logout"

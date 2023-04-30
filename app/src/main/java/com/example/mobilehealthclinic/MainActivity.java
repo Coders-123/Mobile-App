@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
     TextView userName;
     Button logout;
+    Button selectUser;
     GoogleSignInClient gClient;
     GoogleSignInOptions gOptions;
 
@@ -47,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
         logout = findViewById(R.id.logout);
         userName = findViewById(R.id.userName);
+        selectUser = findViewById(R.id.selectUser);
 
         gOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
         gClient = GoogleSignIn.getClient(this, gOptions);
@@ -56,6 +58,12 @@ public class MainActivity extends AppCompatActivity {
             String gName = gAccount.getDisplayName();
             userName.setText(gName);
         }
+        selectUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, FirstSigninActivity.class));
+            }
+        });
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
