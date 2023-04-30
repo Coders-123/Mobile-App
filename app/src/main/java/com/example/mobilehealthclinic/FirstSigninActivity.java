@@ -69,17 +69,18 @@ public class FirstSigninActivity extends AppCompatActivity {
                 String fullname = fullName.getText().toString();
                 String addRess = address.getText().toString();
                 String celL = cell.getText().toString();
-                String type = spinner.getSelectedItem().toString();
                 String speciality = specialityList.getSelectedItem().toString();
 
-                UserHelper.addUser(fullname, addRess, celL, type);
+                String type = spinner.getSelectedItem().toString();
 
                 if (type.equals("Patient")) {
                     PatientHelper.addPatient(fullname, addRess, celL);
+                    UserHelper.addUser(fullname, addRess, celL, "Patient");
                     Intent intent = new Intent(FirstSigninActivity.this, PatientDashboardActivity.class);
                     startActivity(intent);
                 } else {
                     DoctorHelper.addDoctor(fullname, addRess, celL, speciality);
+                    UserHelper.addUser(fullname, addRess, celL, "Doctor");
                     Intent intent = new Intent(FirstSigninActivity.this, DoctorDashboardActivity.class);
                     startActivity(intent);
                 }

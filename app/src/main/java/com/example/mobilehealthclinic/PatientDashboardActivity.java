@@ -5,15 +5,33 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 public class PatientDashboardActivity extends AppCompatActivity {
 
     CardView appointmentsCard;
+    CardView homeCard;
+    CardView medicalhistoryCard;
+    CardView mydoctorsCard;
+    CardView myprofileCard;
+    CardView searchCard;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patientdashboard);
+
+        homeCard = findViewById(R.id.homeCard);
+        homeCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("onClick", "Clicked Appointments Card");
+                Intent intent = new Intent(PatientDashboardActivity.this, PatientsHome.class);
+                startActivity(intent);
+            }
+        });
+
     }
 }

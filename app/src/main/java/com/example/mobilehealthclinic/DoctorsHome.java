@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.denzcoskun.imageslider.ImageSlider;
@@ -23,21 +24,22 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
-
+public class DoctorsHome extends AppCompatActivity {
     TextView userName;
+
+    private ImageView doctorImage;
     Button logout;
-    Button selectUser;
     GoogleSignInClient gClient;
     GoogleSignInOptions gOptions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_doctorshome);
 
         ImageSlider imageSlider= findViewById(R.id.imageSlider);
         ArrayList<SlideModel> slideModels = new ArrayList<>();
+        doctorImage.setImageResource(R.drawable.doctorshome);
 
         slideModels.add(new SlideModel(R.drawable.stevebiko, ScaleTypes.FIT));
         slideModels.add(new SlideModel(R.drawable.isolempilo1, ScaleTypes.FIT));
@@ -50,23 +52,29 @@ public class MainActivity extends AppCompatActivity {
 
         logout = findViewById(R.id.logout);
         userName = findViewById(R.id.userName);
-        selectUser = findViewById(R.id.selectUser);
+        doctorImage = findViewById(R.id.DoctorImage);
 
         gOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
         gClient = GoogleSignIn.getClient(this, gOptions);
+
 
         GoogleSignInAccount gAccount = GoogleSignIn.getLastSignedInAccount(this);
         if (gAccount != null){
             String gName = gAccount.getDisplayName();
             userName.setText(gName);
         }
-
-        selectUser.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, FirstSigninActivity.class));
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            String userType = user.getMetadata().getCreationTimestamp() > user.getMetadata().getLastSignInTimestamp() ? "Patient" : "Doctor";
+            if (userType.equals("Patient")) {
+                startActivity(new Intent(DoctorsHome.this, PatientDashboardActivity.class));
+                finish();
+            } else if (userType.equals("Doctor")) {
+                startActivity(new Intent(DoctorsHome.this, DoctorDashboardActivity.class));
+                finish();
             }
-        });
+        }
+
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -74,10 +82,11 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         finish();
-                        startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                        startActivity(new Intent(DoctorsHome.this, LoginActivity.class));
                     }
                 });
             }
         });
     }
 }
+

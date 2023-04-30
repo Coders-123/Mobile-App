@@ -16,6 +16,8 @@
         <activity android:name=".FirstSigninActivity" />
         <activity android:name=".PatientDashboardActivity" />
         <activity android:name=".DoctorDashboardActivity" />
+        <activity android:name=".PatientsHome" />
+        <activity android:name=".DoctorsHome" />
         <activity android:name=".MainActivity" />
         <activity android:name=".LoginActivity"
             android:exported="true">
